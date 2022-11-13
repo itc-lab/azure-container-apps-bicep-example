@@ -69,7 +69,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
           passwordSecretRef: registryPassword
         }
       ] : null
-      ingress: {
+      ingress: enableIngress ? {
         allowInsecure: false
         external: isExternalIngress
         targetPort: containerPort
@@ -80,7 +80,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
             weight: 100
           }
         ]
-      }
+      } : null
       dapr: {
         enabled: false
       }
